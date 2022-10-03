@@ -77,14 +77,9 @@ class Decoder(nn.Module):
 
     def forward(self, x, encoder_features):
         for i in range(len(self.channels) - 1):
-            print(x.shape)
             x = self.decoding_block[i](x)
-            print(x.shape)
-            print(encoder_features[i].shape)
             x = torch.cat([x, encoder_features[i]], dim=1)
-            print(x.shape)
             x = self.convolution_blocks[i](x)
-            print(x.shape)
         return x
 
 
