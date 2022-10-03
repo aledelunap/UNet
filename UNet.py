@@ -14,6 +14,7 @@ class Block(nn.Module):
                 kernel_size=3,
                 padding=1,
             ),
+            nn.BatchNorm2d(out_channels),
             nn.ReLU(),
             nn.Conv2d(
                 in_channels=out_channels,
@@ -21,8 +22,8 @@ class Block(nn.Module):
                 kernel_size=3,
                 padding=1,
             ),
-            nn.ReLU(),
             nn.BatchNorm2d(out_channels),
+            nn.ReLU(),
         )
 
     def forward(self, x):
@@ -67,7 +68,7 @@ class Decoder(nn.Module):
             [
                 nn.ConvTranspose2d(
                     in_channels=channels[i],
-                    out_channels=channels[i],
+                    out_channels=channels[i + 1],
                     kernel_size=2,
                     stride=2,
                 )
